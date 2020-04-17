@@ -1,3 +1,26 @@
+/* DIGITAL SIGNATURE(S):
+   ====================
+
+   List the student author(s) of this code below:
+
+   Fullname                    Seneca Email Address
+   --------------------------- ----------------------------
+   1) Le Minh Nhat Dang        lmndang@myseneca.ca
+   2) Benson Zhao Lang Li      eisik1@myseneca.ca
+   3) Emre Isik                bli113@myseneca.ca
+
+   +--------------------------------------------------------+
+   |                   FILE: main.c                         |
+   +--------------------------------------------------------+
+   |           2  0  2  0  ~  W  I  N  T  E  R              |
+   |                 I  P  C  :  B  T  P                    |
+   |                 1  4  4  :  1  0  0                    |
+   |              FINAL ASSESSMENT PART - 2                 |
+   |                                                        |
+   |     S  E  N  E  C  A            C  O  L  L  E  G  E    |
+   +--------------------------------------------------------+ */
+
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
@@ -5,7 +28,7 @@
 #include "file_helper.h"
 #include "menu_helper.h"
 
-#define SIZE 500
+#define SIZE 1000
 
 void clearKeyboard(void)
 {
@@ -44,9 +67,6 @@ int getIntInRange(int min, int max)
 
 char getCategory(const struct RiderInfo info[], int realSize)
 {
-	int i = 0;
-	int flag = 0;
-
 	char category = 'x';
 	char newline = 'x';
 
@@ -55,7 +75,7 @@ char getCategory(const struct RiderInfo info[], int realSize)
 	printf("\nWhich category (S, M, L): ");
 	scanf("%c%c", &category, &newline);
 
-	while (category != 'S' && category != 's' && category != 'M' && category != 'm' && category != 'L' && category != 'l' || newline != '\n')
+	while ((category != 'S' && category != 's' && category != 'M' && category != 'm' && category != 'L' && category != 'l') || (newline != '\n'))
 	{
 		if (newline != '\n')
 		{
@@ -161,16 +181,19 @@ int menu(void)
 void managerSystem(void)
 {
 	FILE* data = fopen("data.txt", "r");
-	struct RiderInfo info[SIZE] = { 0 };
+	struct RiderInfo info[SIZE] = { {{0}} };
 
 	int realSize;    //number of lines in the file containing a record
 	int result;
 	int i;
 	int stop = 0;
+	int flag = 0;
+	int selection;
 
 	if (data == NULL)
 	{
-		printf("Unable to open file");
+		printf("\nERROR: Unable to open file for reading\n");
+		flag = 1;
 	}
 	else
 	{
@@ -180,13 +203,15 @@ void managerSystem(void)
 			if (result == 1)        //stop once EOF is reached, and result set to 1         
 			{
 				realSize = i;
-				stop = 1;       
+				stop = 1;
 			}
 		}
+		if (realSize == 1 && strlen(info[0].name) == 0)
+		{
+			printf("\nThe file data.txt is empty! Exiting the program...\n");
+			flag = 1;
+		}
 	}
-
-	int selection;
-	int flag = 0;
 
 	while (flag != 1)
 	{
@@ -225,7 +250,7 @@ void managerSystem(void)
 void sortInfo(struct RiderInfo info[], int realSize)
 {
 	int i, j;
-	struct RiderInfo temp = { 0 }; //
+	struct RiderInfo temp = { { 0 } };
 	double timeDif1;    //difference between start and finishing time for current element (j)
 	double timeDif2;	//difference between start and finishing time for next element (j + 1)
 	//bubble-sort algorithim
@@ -249,7 +274,7 @@ void sortInfo(struct RiderInfo info[], int realSize)
 			{
 				timeDif2 = info[j + 1].finishTime - info[j + 1].startTime;
 			}
-			if (timeDif1 > timeDif2)   
+			if (timeDif1 > timeDif2)
 			{
 				temp = info[j];
 				info[j] = info[j + 1];
@@ -299,7 +324,7 @@ void displayInfo(struct RiderInfo info[], int realSize)
 
 	sortInfo(info, realSize);
 
-	printf("\nRider                    Age Group Time Withdrew\n"); 
+	printf("\nRider                    Age Group Time Withdrew\n");
 	printf("------------------------------------------------\n");
 	for (i = 0; i < realSize; i++)
 	{
@@ -344,7 +369,7 @@ void displayLastThreeRiders(struct RiderInfo info[], int realSize)
 		}
 	}
 	//iterate backwards through matchedElements, to display matched elements in the reverse order they were found
-	for (i = 2; i >= 0; i--)      
+	for (i = 2; i >= 0; i--)
 	{
 		j = matchedElements[i]; //take the index stored in matched elements and use them to display the respective entries in info[]
 		printf("%-25s", info[j].name);
@@ -363,7 +388,7 @@ void displayWinners(struct RiderInfo info[], int realSize)
 
 	sortInfo(info, realSize);
 
-	printf("\nRider                    Age Group Category Time\n"); 
+	printf("\nRider                    Age Group Category Time\n");
 	printf("------------------------------------------------\n");
 	for (i = 0, matches = 0; i < realSize && matches < 1; i++)   //we only need the first matched entry, from a sorted records
 	{

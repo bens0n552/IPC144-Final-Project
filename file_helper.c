@@ -5,12 +5,12 @@
 
    Fullname                    Seneca Email Address
    --------------------------- ----------------------------
-   1)
-   2)
-   3)
+   1) Le Minh Nhat Dang        lmndang@myseneca.ca
+   2) Benson Zhao Lang Li      eisik1@myseneca.ca
+   3) Emre Isik                bli113@myseneca.ca
 
    +--------------------------------------------------------+
-   |                FILE: file_helper.c                     |
+   |                   FILE: main.c                         |
    +--------------------------------------------------------+
    |           2  0  2  0  ~  W  I  N  T  E  R              |
    |                 I  P  C  :  B  T  P                    |
@@ -18,10 +18,6 @@
    |              FINAL ASSESSMENT PART - 2                 |
    |                                                        |
    |     S  E  N  E  C  A            C  O  L  L  E  G  E    |
-   |                                                        |
-   |  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  |
-   |  !!!      DO NOT ALTER THE CONTENTS BELOW         !!!  |
-   |  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  |
    +--------------------------------------------------------+ */
 
 #define _CRT_SECURE_NO_WARNINGS

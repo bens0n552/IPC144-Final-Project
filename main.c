@@ -5,9 +5,9 @@
 
    Fullname                    Seneca Email Address
    --------------------------- ----------------------------
-   1)
-   2)
-   3)
+   1) Le Minh Nhat Dang        lmndang@myseneca.ca 
+   2) Benson Zhao Lang Li      eisik1@myseneca.ca 
+   3) Emre Isik                bli113@myseneca.ca
 
    +--------------------------------------------------------+
    |                   FILE: main.c                         |
